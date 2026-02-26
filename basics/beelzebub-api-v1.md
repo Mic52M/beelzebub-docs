@@ -154,9 +154,12 @@ serverName: "ubuntu"
 passwordRegex: "^(root|qwerty|Smoker666|123456|jenkins|minecraft|sinus|alex|postgres|Ly123456)$"
 deadlineTimeoutSeconds: 120
 plugin:
-    llmProvider: "openai"
-    llmModel: "gpt-4o"
-    openAISecretKey: "sk-proj-1234567890"
+  llmProvider: "openai"
+  llmModel: "gpt-4o"
+  openAISecretKey: "sk-proj-1234567890"
+  rateLimitEnabled: true      # optional
+  rateLimitRequests: 10       # optional
+  rateLimitWindowSeconds: 60  # optional
 ```
 
 **Key Components:**
@@ -214,6 +217,9 @@ The LLMHoneypot plugin provides AI-powered responses to attacker inputs using la
 * `inputValidationPrompt`: Custom prompt for the input validation model
 * `outputValidationEnabled`: Whether to perform output validation for malicious responses
 * `outputValidationPrompt`: Custom prompt for the output validation model&#x20;
+* `rateLimitEnabled`: Whether to enable IP-based rate limiting (default: `false`)
+* `rateLimitRequests`: Maximum number of requests allowed per IP within the time window
+* `rateLimitWindowSeconds`: Duration of the rate limiting time window in seconds
 
 ### Best Practices
 
@@ -271,6 +277,29 @@ plugin:
     llmModel: "gpt-4o"
     openAISecretKey: "sk-proj-XXXXXXXXXXXX"
 ```
+
+#### SSH Honeypot with LLM and Rate Limiting
+
+```yaml
+apiVersion: "v1"
+protocol: "ssh"
+address: ":2222"
+description: "SSH interactive ChatGPT with rate limiting"
+commands:
+  - regex: "^(.+)$"
+    plugin: "LLMHoneypot"
+serverVersion: "OpenSSH"
+serverName: "ubuntu"
+passwordRegex: "^(root|qwerty|123456)$"
+deadlineTimeoutSeconds: 60
+plugin:
+  llmProvider: "openai"
+  llmModel: "gpt-4o"
+  openAISecretKey: "sk-proj-XXXXXXXXXXXX"
+  rateLimitEnabled: true
+  rateLimitRequests: 10
+  rateLimitWindowSeconds: 60
+
 
 #### Database Service Honeypot
 
