@@ -154,9 +154,9 @@ serverName: "ubuntu"
 passwordRegex: "^(root|qwerty|Smoker666|123456|jenkins|minecraft|sinus|alex|postgres|Ly123456)$"
 deadlineTimeoutSeconds: 120
 plugin:
-    llmProvider: "openai"
-    llmModel: "gpt-4o"
-    openAISecretKey: "sk-proj-1234567890"
+  llmProvider: "openai"
+  llmModel: "gpt-4o"
+  openAISecretKey: "sk-proj-1234567890"
 ```
 
 **Key Components:**
@@ -201,7 +201,7 @@ deadlineTimeoutSeconds: 10
 
 The LLMHoneypot plugin provides AI-powered responses to attacker inputs using language models.
 
-**Compatibility:** Only available for HTTP and SSH protocols.
+**Compatibility:** Only available for HTTP, SSH and Telnet protocols.
 
 **Configuration Parameters:**
 
@@ -214,6 +214,9 @@ The LLMHoneypot plugin provides AI-powered responses to attacker inputs using la
 * `inputValidationPrompt`: Custom prompt for the input validation model
 * `outputValidationEnabled`: Whether to perform output validation for malicious responses
 * `outputValidationPrompt`: Custom prompt for the output validation model&#x20;
+* `rateLimitEnabled`: Whether to enable IP-based rate limiting (default: `false`)
+* `rateLimitRequests`: Maximum number of requests allowed per IP within the time window
+* `rateLimitWindowSeconds`: Duration of the rate limiting time window in seconds
 
 ### Best Practices
 
