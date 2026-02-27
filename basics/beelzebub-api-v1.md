@@ -157,9 +157,6 @@ plugin:
   llmProvider: "openai"
   llmModel: "gpt-4o"
   openAISecretKey: "sk-proj-1234567890"
-  rateLimitEnabled: true      # optional
-  rateLimitRequests: 10       # optional
-  rateLimitWindowSeconds: 60  # optional
 ```
 
 **Key Components:**
@@ -204,7 +201,7 @@ deadlineTimeoutSeconds: 10
 
 The LLMHoneypot plugin provides AI-powered responses to attacker inputs using language models.
 
-**Compatibility:** Only available for HTTP and SSH protocols.
+**Compatibility:** Only available for HTTP, SSH and Telnet protocols.
 
 **Configuration Parameters:**
 
@@ -276,38 +273,4 @@ plugin:
     llmProvider: "openai"
     llmModel: "gpt-4o"
     openAISecretKey: "sk-proj-XXXXXXXXXXXX"
-```
-
-#### SSH Honeypot with LLM and Rate Limiting
-
-```yaml
-apiVersion: "v1"
-protocol: "ssh"
-address: ":2222"
-description: "SSH interactive ChatGPT with rate limiting"
-commands:
-  - regex: "^(.+)$"
-    plugin: "LLMHoneypot"
-serverVersion: "OpenSSH"
-serverName: "ubuntu"
-passwordRegex: "^(root|qwerty|123456)$"
-deadlineTimeoutSeconds: 60
-plugin:
-  llmProvider: "openai"
-  llmModel: "gpt-4o"
-  openAISecretKey: "sk-proj-XXXXXXXXXXXX"
-  rateLimitEnabled: true
-  rateLimitRequests: 10
-  rateLimitWindowSeconds: 60
-
-
-#### Database Service Honeypot
-
-```yaml
-apiVersion: "v1"
-protocol: "tcp"
-address: ":3306"
-description: "MySQL Server"
-banner: "5.7.38-log MySQL Community Server (GPL)"
-deadlineTimeoutSeconds: 15
 ```
