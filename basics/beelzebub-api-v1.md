@@ -274,3 +274,14 @@ plugin:
     llmModel: "gpt-4o"
     openAISecretKey: "sk-proj-XXXXXXXXXXXX"
 ```
+
+#### Database Service Honeypot
+
+```yaml
+apiVersion: "v1"
+protocol: "tcp"
+address: ":3306"
+description: "MySQL Server"
+banner: "5.7.38-log MySQL Community Server (GPL)"
+deadlineTimeoutSeconds: 15
+```
